@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <title>VLN-SHWCASE</title>
+</head>
+<body>
+    <div class="main-container">
+        <h1 id="main-title">VLN-SHOWCASE</h1>
+        <hr>
+        <div class="vuln-container">
+            <h1 class="vuln-name">SQL Injection</h1>
+            <div class="vuln-body">
+                <div class="vuln-description">
+                    <h2>SQL injection je napad kojim se ilegalnim upitima može doći do osjetljivih informacija iz baze podataka.
+                         Ranjivost koja ovaj napad omogućuje može imati katastrofalne posljedice. Obrana je sanitizacija korisničkog unosa 
+                         i pripremljene SQL rečenice.</h2>
+                </div>
+                <div class="vuln-demo">
+                    <div class="vuln-demo-header">
+                        <h3>Demo: Korisnički email</h3>
+                    </div>
+                    <div class="vuln-demo-body">
+                        <p>U ovoj demonstraciji koristimo bazu streamService koja sadrži informacije o filmovima, serijama i korisnicima koji ih gledaju.
+                            ispod je moguće pretražiti filmove i serije, no iskoristavajući ranjivost možemo doći do korisničlih podataka. Cilj nam je
+                            doći do email adresa (na pretragu je stavljeno ograničenje od maksimalno 20 rezultata zbog preglednosti).
+
+                            S uključenom ranjivošću, upis 
+                            <br>
+                            <b>&emsp;a' UNION SELECT oemail FROM owner LIMIT 20 --</b> 
+                            <br>
+                             u unos teksta uz filmove vraća i email adrese korisnika ovog servisa.
+                        </p>
+                        <div class="vuln-demo-playground">
+                            <div class="vuln-demo-playground-header">
+                                <div>
+                                    <input type="text" class="input-field" id="movie-search">
+                                    <button class="secondary-button">Pretraži filmove i serije</button>
+                                </div>
+                                <button id="sql-vuln-toggle" class="vuln-on">Isključi ranjivost</button>
+                            </div>
+                            <div class="vuln-demo-playground-results">
+                                <ul id="search-results">
+                                    <li>-</li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vuln-container">
+            <h1 class="vuln-name">Broken Auth</h1>
+            <div class="vuln-body">
+                <div class="vuln-description">
+                    <h2>Broken Auth je naziv sa skupinu ranjivosti koji opisiju situacije u kojima se autentifikacija može zaobići ili
+                        situacije u kojima može doći do lažnog predstavljanja i krađe sjednica.
+                    </h2>
+                </div>
+                <div class="vuln-demo">
+                    <div class="vuln-demo-header">
+                        <h3>Demo: Preuzimanje računa</h3>
+                    </div>
+                    <div class="vuln-demo-body">
+                        <p>U ovoj demonstraciji ćemo pokazati kako loše implementirana promjena šifre dovodi do krađe računa. S uključenom
+                            ranjivošću, samo je potrebno upisati bilo šta u old password polje te upisati novu šifru. Server neće validirati da li je 
+                            upisana stara šifra točna.
+                            S ugašenom ranjivošću server će provjeravati da li je unešena stara šifra točna, te ako nije, poslati poruku na registrirani
+                            broj da promjena šifre nije uspjela, u slučaju da riječ o napadu
+                        </p>
+                        <div class="vuln-demo-playground">
+                            <div class="vuln-demo-playground-header">
+                                <div>
+                                    <input type="email" id="email" placeholder="Email" required>
+                                    <input type="password" id="old-password" placeholder="Old Password" required>
+                                    <input type="password" id="new-password" placeholder="New Password" required>
+                                    <button id="submit-password-change" class="secondary-button">Submit</button>
+                                </div>
+                                <button id="auth-vuln-toggle" class="vuln-on">Isključi ranjivost</button>
+                            </div>
+                            <div class="vuln-demo-playground-results">
+                                <p id="change-result"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    
+    <script src="/scripts/vuln_simulator.js"></script>
+</body>
+</html>
